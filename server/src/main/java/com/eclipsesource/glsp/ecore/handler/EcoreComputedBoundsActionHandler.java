@@ -44,7 +44,7 @@ public class EcoreComputedBoundsActionHandler extends ComputedBoundsActionHandle
 			GModelRoot model = modelState.getRoot();
 			if (model != null && model.getRevision() == computedBoundsAction.getRevision()) {
 				LayoutUtil.applyBounds(model, computedBoundsAction, graphicalModelState);
-				return submissionHandler.doSubmitModel(false, modelState);
+				return submissionHandler.doSubmitModel(true, modelState);
 			}
 		}
 		return Optional.empty();
