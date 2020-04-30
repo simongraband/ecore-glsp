@@ -10,12 +10,16 @@
  ********************************************************************************/
 package org.eclipse.emfcloud.ecore.glsp.operationhandler;
 
+<<<<<<< HEAD
 import java.util.Collection;
 import java.util.Optional;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+=======
+import org.eclipse.emf.ecore.EClass;
+>>>>>>> 20138ebc87c44d49a8e8040d657f371165c80eac
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
@@ -33,6 +37,7 @@ import org.eclipse.glsp.server.operationhandler.DeleteOperationHandler;
 public class EcoreDeleteOperationHandler extends DeleteOperationHandler {
 	@Override
 	protected boolean delete(String elementId, GModelIndex index, GraphicalModelState graphicalModelState) {
+<<<<<<< HEAD
 		super.delete(elementId, index, graphicalModelState);
 		EcoreModelState modelState = EcoreModelState.getModelState(graphicalModelState);
 		
@@ -55,6 +60,17 @@ public class EcoreDeleteOperationHandler extends DeleteOperationHandler {
 						}
 					}
 				}
+=======
+
+		super.delete(elementId, index, graphicalModelState);
+		EcoreModelState modelState = EcoreModelState.getModelState(graphicalModelState);
+
+		modelState.getIndex().getSemantic(elementId).ifPresentOrElse(element -> {
+			if (element instanceof EReference && ((EReference) element).getEOpposite() != null) {
+				EcoreUtil.delete(((EReference) element).getEOpposite());
+				modelState.getIndex().getBidirectionalReferences()
+						.remove(EcoreEdgeUtil.getStringId((EReference) element));
+>>>>>>> 20138ebc87c44d49a8e8040d657f371165c80eac
 			}
 		}, () -> {
 			//just for Debugging
@@ -70,8 +86,13 @@ public class EcoreDeleteOperationHandler extends DeleteOperationHandler {
 			});
 		});
 
+<<<<<<< HEAD
 		notation.ifPresent(EcoreUtil::remove);
 		semantic.ifPresent(EcoreUtil::remove);
+=======
+		modelState.getIndex().getSemantic(elementId).ifPresent(EcoreUtil::remove);
+		modelState.getIndex().getNotation(elementId).ifPresent(EcoreUtil::remove);
+>>>>>>> 20138ebc87c44d49a8e8040d657f371165c80eac
 		return true;
 	}
 
