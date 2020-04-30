@@ -162,6 +162,18 @@ public class EcoreFacade {
 		return edge;
 	}
 
+	public Edge initializeInheritanceEdge(EObject semanticElement, GEdge gEdge) {
+		Edge edge = EnotationFactory.eINSTANCE.createEdge();
+		edge.setSemanticElement(createProxy(semanticElement));
+		String id = gEdge.getId();
+		edge.getSemanticElement().setUri(id);
+		if (gEdge != null) {
+			updateEdge(edge, gEdge);
+		}
+		modelIndex.indexNotation(edge);
+		return edge;
+	}
+
 	public SemanticProxy createProxy(EObject eObject) {
 		SemanticProxy proxy = EnotationFactory.eINSTANCE.createSemanticProxy();
 		proxy.setResolvedElement(eObject);

@@ -18,7 +18,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emfcloud.ecore.enotation.Diagram;
+import org.eclipse.emfcloud.ecore.enotation.EnotationFactory;
 import org.eclipse.emfcloud.ecore.enotation.NotationElement;
+import org.eclipse.emfcloud.ecore.enotation.SemanticProxy;
 import org.eclipse.emfcloud.ecore.glsp.EcoreEditorContext;
 import org.eclipse.emfcloud.ecore.glsp.EcoreFacade;
 import org.eclipse.emfcloud.ecore.glsp.EcoreModelIndex;
@@ -29,6 +31,7 @@ import org.eclipse.glsp.api.operation.Operation;
 import org.eclipse.glsp.api.operation.kind.CreateEdgeOperation;
 import org.eclipse.glsp.graph.GEdge;
 import org.eclipse.glsp.server.operationhandler.BasicOperationHandler;
+import org.eclipse.emfcloud.ecore.enotation.Edge;
 
 import com.google.common.collect.Lists;
 
@@ -61,6 +64,20 @@ public class CreateEcoreEdgeOperationHandler extends BasicOperationHandler<Creat
 
 		if (elementTypeId.equals(Types.INHERITANCE)) {
 			sourceEclass.getESuperTypes().add(targetEClass);
+
+			//create notation/semantic element
+			Edge inheritance = EnotationFactory.eINSTANCE.createEdge();
+			/*SemanticProxy proxy = facade.createProxy(inheritance);
+			proxy.setResolvedElement(inheritance);
+			proxy.setUri(operation.getSourceElementId() + "_" + operation.getTargetElementId());
+			inheritance.setSemanticElement(proxy);*/
+
+			//write into index
+			GEdge edge = context.getGModelFactory().create(sourceEclass, targetEClass);
+			diagram.getElements().add(facade.initializeInheritanceEdge(inheritance, edge));
+			//diagram.getElements().add(inheritance); //This adds the Edge to the enotation file
+
+			System.out.println("debug");
 		} else {
 			EReference reference = createReference(sourceEclass, targetEClass,
 					elementTypeId.equals(Types.BIDIRECTIONAL_COMPOSITION) ? Types.COMPOSITION : elementTypeId);
