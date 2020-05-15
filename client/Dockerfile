@@ -1,4 +1,4 @@
-FROM node:10.18.0-alpine3.10
+FROM node:10.18.0-alpine3.10 AS builder
 
 RUN mkdir /usr/src/client -p
 
@@ -22,3 +22,18 @@ WORKDIR ./browser-app
 EXPOSE 3000
 
 CMD yarn start --hostname 0.0.0.0
+
+
+FROM node:10.18.0-alpine3.10 AS production
+
+WORKDIR /root/
+
+COPY --from=builder /usr/src/client/browser-app .
+
+COPY --from=builder /usr/src/client/theia-ecore .
+
+WORKDIR ./browser-app
+
+EXPOSE 3000
+
+CMD theia start --hostname 0.0.0.0
