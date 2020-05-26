@@ -668,6 +668,18 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@eclipse-che/api@latest":
+  version "7.5.0-SNAPSHOT"
+  resolved "https://registry.yarnpkg.com/@eclipse-che/api/-/api-7.5.0-SNAPSHOT.tgz#bf0c5be60354e34c73bc52b2e18be8680ce8d900"
+  integrity sha512-4CgKEGCBOIOBGBNoH0dhN8TkP1Sj39fG4LGCXYw3JB7nQucVooJyq7AhIV+w7L4iZ+ln+y2KEfZugCmOIuzIeQ==
+
+"@eclipse-che/plugin@^0.0.1-1590158500":
+  version "0.0.1-1590158500"
+  resolved "https://registry.yarnpkg.com/@eclipse-che/plugin/-/plugin-0.0.1-1590158500.tgz#54228d8b7f5859339739ec2b290f2b41b32f479e"
+  integrity sha512-AS/4juSOU5NLGOW2SLteUKw8AqG5aet0heaxx4RbOuwzWLTd8yMRJq9uC2IzpjDyzLeiOk1CfA7IGS1K8ofP+A==
+  dependencies:
+    "@eclipse-che/api" latest
+
 "@eclipse-glsp/client@0.8.0-rc-02", "@eclipse-glsp/client@next":
   version "0.8.0-rc-02"
   resolved "https://registry.yarnpkg.com/@eclipse-glsp/client/-/client-0.8.0-rc-02.tgz#3a5777671e5aacbe04ef75af7755a809ca26bd45"

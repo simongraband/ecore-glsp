@@ -52,6 +52,7 @@
     "browser-app"
   ],
   "dependencies": {
+    "@eclipse-che/plugin": "^0.0.1-1590158500",
     "yarn": "^1.21.1"
   }
 }
