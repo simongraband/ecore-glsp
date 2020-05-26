@@ -19,6 +19,7 @@ import {
 import { ContainerModule, interfaces } from "inversify";
 import { DiagramConfiguration, DiagramManager, DiagramManagerProvider } from "sprotty-theia/lib";
 
+import { TheiaMarkerManager, TheiaMarkerManagerFactory } from "./diagram/ecore-glsp-theia-marker-manager";
 import { FILEGEN_SERVICE_PATH, FileGenServer } from "../common/generate-protocol";
 import { EcoreDiagramConfiguration } from "./diagram/ecore-diagram-configuration";
 import { EcoreDiagramManager } from "./diagram/ecore-diagram-manager.";
@@ -49,4 +50,9 @@ export default new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Un
         const connection = ctx.container.get(WebSocketConnectionProvider);
         return connection.createProxy<FileGenServer>(FILEGEN_SERVICE_PATH);
     }).inSingletonScope();
+    bind(TheiaMarkerManagerFactory).toFactory(context => () => {
+        const container = context.container.createChild();
+        container.bind(TheiaMarkerManager).toSelf().inSingletonScope();
+        return container.get(TheiaMarkerManager);
+    });
 });
