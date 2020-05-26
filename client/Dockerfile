@@ -1,4 +1,4 @@
-FROM node:10.18.0-alpine3.10 as client-start
+FROM node:10.18.0-alpine3.10
 
 RUN mkdir /usr/src/client -p
 
