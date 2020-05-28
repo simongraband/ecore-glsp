@@ -22,7 +22,11 @@
   "dependencies": {
     "@eclipse-glsp/theia-integration": "next",
     "@theia/core": "latest",
-    "sprotty-ecore": "0.2.0"
+    "sprotty-ecore": "0.2.0",
+    "@theia/plugin-dev": "latest",
+    "@theia/plugin-ext": "latest",
+    "@eclipse-che/workspace-client": "latest",
+    "@eclipse-che/api": "latest"
   },
   "devDependencies": {
     "rimraf": "latest",
