@@ -2,11 +2,13 @@
   "extends": "../configs/base.tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "rootDir": "src",
     "outDir": "lib",
-    "skipLibCheck": true
+    "skipLibCheck": false,
+    "paths": {}
   },
   "include": [
-    "src"
-  ]
+    "dev-packages/*/src",
+    "src",
+    "extensions/*/src"
+],
 }
